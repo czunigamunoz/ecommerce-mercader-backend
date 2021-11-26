@@ -1,11 +1,12 @@
 package com.ecommerce.app.services;
 
-import com.ecommerce.app.entities.User;
+import com.ecommerce.app.model.User;
 import com.ecommerce.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -31,29 +32,23 @@ public class UserService {
     }
 
     /**
-     * Get a user
-     * @param id Integer
-     * @return User if exists or false if not
-     */
-    public Optional<User> getUser(int id){
-        return repository.getUser(id);
-    }
-
-    /**
      * Create a user
      * @param user User
      * @return User created
      */
     public User save(User user){
-        if (user.getId() == null){
-            if (!existEmail(user.getEmail())){
-                return repository.save(user);
-            } else {
-                return user;
-            }
-        } else {
+        if (user.getName() == null
+                || user.getEmail() == null
+                || user.getPassword() == null
+                || user.getIdentification() == null
+                || user.getType() == null){
             return user;
         }
+        Optional<User> userTemp = repository.authUser(user.getEmail(), user.getPassword());
+        if (userTemp.isEmpty()){
+            return repository.save(user);
+        }
+        return user;
     }
 
     /**
@@ -62,20 +57,39 @@ public class UserService {
      * @return User with fields updated or user with same fields that received
      */
     public User update(User user){
-        if (user.getId() != null){
-            Optional<User> isUser = repository.getUser(user.getId());
-            if (isUser.isPresent()){
-                if (user.getEmail() != null){
-                    isUser.get().setEmail(user.getEmail());
-                }
-                if (user.getPassword() != null){
-                    isUser.get().setPassword(user.getPassword());
-                }
-                if (user.getName() != null){
-                    isUser.get().setName(user.getName());
-                }
-                return repository.save(isUser.get());
+        Optional<User> isUser = repository.getById(user.getId());
+        if (isUser.isPresent()) {
+            if (user.getIdentification() != null && user.getIdentification().length() > 0){
+                isUser.get().setIdentification(user.getIdentification());
             }
+            if (user.getName() != null && user.getName().length() > 0){
+                isUser.get().setName(user.getName());
+            }
+            if (user.getBirthDay() != null){
+                isUser.get().setBirthDay(user.getBirthDay());
+            }
+            if (user.getMonthBirthDay() != null && user.getMonthBirthDay().length() > 0){
+                isUser.get().setMonthBirthDay(user.getMonthBirthDay());
+            }
+            if (user.getAddress() != null && user.getAddress().length() > 0){
+                isUser.get().setAddress(user.getAddress());
+            }
+            if (user.getCellPhone() != null && user.getCellPhone().length() > 0){
+                isUser.get().setCellPhone(user.getCellPhone());
+            }
+            if (user.getEmail() != null && user.getEmail().length() > 0){
+                isUser.get().setEmail(user.getEmail());
+            }
+            if (user.getPassword() != null && user.getPassword().length() > 0){
+                isUser.get().setPassword(user.getPassword());
+            }
+            if (user.getZone() != null && user.getZone().length() > 0){
+                isUser.get().setZone(user.getZone());
+            }
+            if (user.getType() != null && user.getType().length() > 0){
+                isUser.get().setType(user.getType());
+            }
+            return repository.save(isUser.get());
         }
         return user;
     }
@@ -83,19 +97,18 @@ public class UserService {
     /**
      * Delete user
      * @param id Integer
-     * @return Boolean
      */
-    public boolean delete(int id){
-        return getUser(id).map(user -> {
-            repository.delete(user);
-            return true;
-        }).orElse(false);
+    public void delete(Integer id){
+        Optional<User> user = repository.getById(id);
+        if (user.isPresent()){
+            repository.delete(id);
+        }
     }
 
     /**
      * Validate if an email is in the database
-     * @param email
-     * @return
+     * @param email String
+     * @return Boolean
      */
     public boolean existEmail(String email){
         return repository.existEmail(email);
@@ -109,15 +122,6 @@ public class UserService {
      */
     public User authUser(String email, String password){
         Optional<User> user = repository.authUser(email, password);
-
-        if (user.isPresent()){
-            return user.get();
-        } else {
-            User userTemp = new User();
-            userTemp.setEmail(email);
-            userTemp.setPassword(password);
-            userTemp.setName("NO DEFINIDO");
-            return userTemp;
-        }
+        return user.orElseGet(User::new);
     }
 }

@@ -1,19 +1,10 @@
 package com.ecommerce.app.controllers;
 
-import com.ecommerce.app.entities.User;
+import com.ecommerce.app.model.User;
 import com.ecommerce.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -58,7 +49,7 @@ public class UserController {
      * @param email String email's user
      * @return Boolean
      */
-    @GetMapping("/{email}")
+    @GetMapping("/emailexist/{email}")
     public  boolean existEmail(@PathVariable("email") String email){
         return service.existEmail(email);
     }
@@ -83,5 +74,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public User update(@RequestBody User user){
         return service.update(user);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+
+    public void delete(@PathVariable("id") Integer id){
+        service.delete(id);
     }
 }

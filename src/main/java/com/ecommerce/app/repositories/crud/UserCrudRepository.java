@@ -1,7 +1,8 @@
 package com.ecommerce.app.repositories.crud;
 
-import com.ecommerce.app.entities.User;
-import org.springframework.data.repository.CrudRepository;
+import com.ecommerce.app.model.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import java.util.Optional;
 
@@ -10,20 +11,14 @@ import java.util.Optional;
  * @version 1.0
  * @author czm
  */
-public interface UserCrudRepository extends CrudRepository<User, Integer> {
+public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
-    /**
-     * Find user with a specific email
-     * @param email String
-     * @return User with this email or null
-     */
-    Optional<User> findByEmail(String email);
+    @Query("{id: ?0}")
+    public Optional<User> getById(Integer id);
 
-    /**
-     * Find user with a specific email and password
-     * @param email String
-     * @param password String
-     * @return User with this email and password or null
-     */
-    Optional<User> findByEmailAndPassword(String email, String password);
+    @Query("{email: ?0}")
+    public Optional<User> getByEmail(String email);
+
+    @Query("{$and: [{email: ?0}, {password: ?0}]}")
+    public Optional<User> getByEmailAndPassword(String email, String password);
 }

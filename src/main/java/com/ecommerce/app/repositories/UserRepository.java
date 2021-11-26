@@ -1,6 +1,6 @@
 package com.ecommerce.app.repositories;
 
-import com.ecommerce.app.entities.User;
+import com.ecommerce.app.model.User;
 import com.ecommerce.app.repositories.crud.UserCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,7 +27,7 @@ public class UserRepository {
      * @return List
      */
     public List<User> getAll(){
-        return (List<User>) crudRepository.findAll();
+        return crudRepository.findAll();
     }
 
     /**
@@ -35,7 +35,7 @@ public class UserRepository {
      * @param id Integer
      * @return User with this id or null
      */
-    public Optional<User> getUser(int id){
+    public Optional<User> getById(Integer id){
         return crudRepository.findById(id);
     }
 
@@ -50,10 +50,10 @@ public class UserRepository {
 
     /**
      * Delete a user
-     * @param user User
+     * @param id Integer
      */
-    public void delete(User user){
-        crudRepository.delete(user);
+    public void delete(Integer id){
+        crudRepository.deleteById(id);
     }
 
     /**
@@ -62,7 +62,7 @@ public class UserRepository {
      * @return Boolean, true if exists or false if not
      */
     public boolean existEmail(String email){
-        Optional<User> user = crudRepository.findByEmail(email);
+        Optional<User> user = crudRepository.getByEmail(email);
         return user.isPresent();
     }
 
@@ -73,6 +73,6 @@ public class UserRepository {
      * @return User with this credentials
      */
     public Optional<User> authUser(String email, String password){
-        return crudRepository.findByEmailAndPassword(email, password);
+        return crudRepository.getByEmailAndPassword(email, password);
     }
 }
