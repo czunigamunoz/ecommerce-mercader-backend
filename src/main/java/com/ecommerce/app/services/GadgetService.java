@@ -8,25 +8,51 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Represents a user service
+ * @version 1.0
+ * @author czm
+ */
 @Service
 public class GadgetService {
 
+    /**
+     * Represents Gadget repository
+     */
     @Autowired
     GadgetRepository repository;
 
+    /**
+     * Get gadget list
+     * @return List of gadgets
+     */
     public List<Gadget> getAll(){
         return repository.getAll();
     }
 
+    /**
+     * Create a gadget
+     * @param gadget Gadget object
+     * @return Gadget created
+     */
     public Gadget save(Gadget gadget){
         return repository.save(gadget);
     }
 
+    /**
+     * Delete gadget
+     * @param id Integer
+     */
     public void delete(Integer id){
         Optional<Gadget> gadgetTemp = repository.getById(id);
-        gadgetTemp.ifPresent(gadget -> repository.delete(gadget));
+        gadgetTemp.ifPresent(gadget -> repository.delete(id));
     }
 
+    /**
+     * Update gadget
+     * @param gadget Gadget object
+     * @return Gadget with fields updated or gadget with same fields that received
+     */
     public Gadget update(Gadget gadget){
         Optional<Gadget> gadgetTemp = repository.getById(gadget.getId());
         if (gadgetTemp.isPresent()){

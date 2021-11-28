@@ -25,7 +25,7 @@ public class UserController {
     private UserService service;
 
     /**
-     * Return a list of users
+     * Return a list of users on database
      * @return A list representing users
      */
     @GetMapping("/all")
@@ -68,7 +68,7 @@ public class UserController {
     /**
      * Function to update a user
      * @param user User
-     * @return User with all data updated
+     * @return User updated or if already exists on database return same data that receives
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)

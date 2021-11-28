@@ -37,7 +37,8 @@ public class UserService {
      * @return User created
      */
     public User save(User user){
-        if (user.getName() == null
+        if (user.getId() == null
+                || user.getName() == null
                 || user.getEmail() == null
                 || user.getPassword() == null
                 || user.getIdentification() == null
@@ -64,12 +65,6 @@ public class UserService {
             }
             if (user.getName() != null && user.getName().length() > 0){
                 isUser.get().setName(user.getName());
-            }
-            if (user.getBirthDay() != null){
-                isUser.get().setBirthDay(user.getBirthDay());
-            }
-            if (user.getMonthBirthDay() != null && user.getMonthBirthDay().length() > 0){
-                isUser.get().setMonthBirthDay(user.getMonthBirthDay());
             }
             if (user.getAddress() != null && user.getAddress().length() > 0){
                 isUser.get().setAddress(user.getAddress());
@@ -122,6 +117,6 @@ public class UserService {
      */
     public User authUser(String email, String password){
         Optional<User> user = repository.authUser(email, password);
-        return user.orElseGet(User::new);
+        return user.orElse(new User());
     }
 }

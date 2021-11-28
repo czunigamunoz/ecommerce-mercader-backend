@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
-import java.sql.Date;
-
 /**
  * Represents an User
  * @version 1.0
@@ -17,8 +14,8 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "usuarios")
-public class User implements Serializable {
+@Document(collection = "users")
+public class User {
 
     /**
      * Represents primary key from user
@@ -32,10 +29,6 @@ public class User implements Serializable {
      * Represents user's name
      */
     private String name;
-
-    private Date birthDay;
-
-    private String monthBirthDay;
 
     private String address;
 

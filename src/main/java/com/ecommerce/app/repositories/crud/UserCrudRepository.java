@@ -13,12 +13,9 @@ import java.util.Optional;
  */
 public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
-    @Query("{id: ?0}")
     public Optional<User> getById(Integer id);
 
-    @Query("{email: ?0}")
     public Optional<User> getByEmail(String email);
 
-    @Query("{$and: [{email: ?0}, {password: ?0}]}")
     public Optional<User> getByEmailAndPassword(String email, String password);
 }
