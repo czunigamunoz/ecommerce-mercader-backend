@@ -31,6 +31,10 @@ public class UserService {
         return repository.getAll();
     }
 
+    public Optional<User> getUser(int id) {
+        return repository.getById(id);
+    }
+
     /**
      * Create a user
      * @param user User
@@ -47,7 +51,7 @@ public class UserService {
         }
         Optional<User> userTemp = repository.authUser(user.getEmail(), user.getPassword());
         if (userTemp.isEmpty()){
-            return repository.save(user);
+            return repository.create(user);
         }
         return user;
     }
@@ -58,33 +62,37 @@ public class UserService {
      * @return User with fields updated or user with same fields that received
      */
     public User update(User user){
-        Optional<User> isUser = repository.getById(user.getId());
-        if (isUser.isPresent()) {
-            if (user.getIdentification() != null && user.getIdentification().length() > 0){
-                isUser.get().setIdentification(user.getIdentification());
+        if (user.getId() != null){
+            Optional<User> isUser = repository.getById(user.getId());
+            if (isUser.isPresent()) {
+                if (user.getIdentification() != null && user.getIdentification().length() > 0){
+                    isUser.get().setIdentification(user.getIdentification());
+                }
+                if (user.getName() != null && user.getName().length() > 0){
+                    isUser.get().setName(user.getName());
+                }
+                if (user.getAddress() != null && user.getAddress().length() > 0){
+                    isUser.get().setAddress(user.getAddress());
+                }
+                if (user.getCellPhone() != null && user.getCellPhone().length() > 0){
+                    isUser.get().setCellPhone(user.getCellPhone());
+                }
+                if (user.getEmail() != null && user.getEmail().length() > 0){
+                    isUser.get().setEmail(user.getEmail());
+                }
+                if (user.getPassword() != null && user.getPassword().length() > 0){
+                    isUser.get().setPassword(user.getPassword());
+                }
+                if (user.getZone() != null && user.getZone().length() > 0){
+                    isUser.get().setZone(user.getZone());
+                }
+                if (user.getType() != null && user.getType().length() > 0){
+                    isUser.get().setType(user.getType());
+                }
+                repository.update(isUser.get());
+                return isUser.get();
             }
-            if (user.getName() != null && user.getName().length() > 0){
-                isUser.get().setName(user.getName());
-            }
-            if (user.getAddress() != null && user.getAddress().length() > 0){
-                isUser.get().setAddress(user.getAddress());
-            }
-            if (user.getCellPhone() != null && user.getCellPhone().length() > 0){
-                isUser.get().setCellPhone(user.getCellPhone());
-            }
-            if (user.getEmail() != null && user.getEmail().length() > 0){
-                isUser.get().setEmail(user.getEmail());
-            }
-            if (user.getPassword() != null && user.getPassword().length() > 0){
-                isUser.get().setPassword(user.getPassword());
-            }
-            if (user.getZone() != null && user.getZone().length() > 0){
-                isUser.get().setZone(user.getZone());
-            }
-            if (user.getType() != null && user.getType().length() > 0){
-                isUser.get().setType(user.getType());
-            }
-            return repository.save(isUser.get());
+            return user;
         }
         return user;
     }
@@ -93,11 +101,11 @@ public class UserService {
      * Delete user
      * @param id Integer
      */
-    public void delete(Integer id){
-        Optional<User> user = repository.getById(id);
-        if (user.isPresent()){
-            repository.delete(id);
-        }
+    public boolean delete(Integer id){
+        return getUser(id).map(user -> {
+            repository.delete(user);
+            return true;
+        }).orElse(false);
     }
 
     /**

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents a user controller
@@ -30,6 +31,11 @@ public class GadgetController {
     @GetMapping("/all")
     public List<Gadget> getAll() {
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Gadget> getGadget(@PathVariable("id") int id){
+        return service.getGadget(id);
     }
 
     /**
@@ -60,7 +66,7 @@ public class GadgetController {
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") Integer id) {
-        service.delete(id);
+    public boolean delete(@PathVariable("id") Integer id) {
+        return service.delete(id);
     }
 }

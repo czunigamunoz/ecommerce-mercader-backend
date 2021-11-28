@@ -7,7 +7,4 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.Optional;
 
 public interface GadgetCrudRepository extends MongoRepository<Gadget, Integer> {
-
-    @Query("{id: ?0}")
-    public Optional<Gadget> getById(Integer id);
 }

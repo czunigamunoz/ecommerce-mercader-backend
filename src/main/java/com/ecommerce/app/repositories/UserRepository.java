@@ -44,16 +44,20 @@ public class UserRepository {
      * @param user User
      * @return User
      */
-    public User save(User user){
+    public User create(User user){
         return crudRepository.save(user);
+    }
+
+    public void update(User user){
+        crudRepository.save(user);
     }
 
     /**
      * Delete a user
-     * @param id Integer
+     * @param user User
      */
-    public void delete(Integer id){
-        crudRepository.deleteById(id);
+    public void delete(User user){
+        crudRepository.delete(user);
     }
 
     /**

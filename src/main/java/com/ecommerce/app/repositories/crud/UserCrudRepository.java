@@ -13,8 +13,6 @@ import java.util.Optional;
  */
 public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
-    public Optional<User> getById(Integer id);
-
     public Optional<User> getByEmail(String email);
 
     public Optional<User> getByEmailAndPassword(String email, String password);

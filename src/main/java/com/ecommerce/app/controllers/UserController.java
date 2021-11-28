@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents a user controller
@@ -31,6 +32,11 @@ public class UserController {
     @GetMapping("/all")
     public List<User> getAll(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<User> getUser(@PathVariable("id") int id){
+        return service.getUser(id);
     }
 
     /**
@@ -78,8 +84,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-
-    public void delete(@PathVariable("id") Integer id){
-        service.delete(id);
+    public boolean delete(@PathVariable("id") Integer id){
+        return service.delete(id);
     }
 }

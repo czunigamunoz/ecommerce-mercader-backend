@@ -36,7 +36,7 @@ public class GadgetRepository {
      * @return Gadget with this id or null
      */
     public Optional<Gadget> getById(Integer id){
-        return crudRepository.getById(id);
+        return crudRepository.findById(id);
     }
 
     /**
@@ -44,15 +44,19 @@ public class GadgetRepository {
      * @param gadget Gadget object
      * @return Gadget
      */
-    public Gadget save(Gadget gadget){
+    public Gadget create(Gadget gadget){
         return crudRepository.save(gadget);
+    }
+
+    public void update(Gadget gadget){
+        crudRepository.save(gadget);
     }
 
     /**
      * Delete a gadget
-     * @param id Integer
+     * @param gadget Gadget
      */
-    public void delete(Integer id){
-        crudRepository.deleteById(id);
+    public void delete(Gadget gadget){
+        crudRepository.delete(gadget);
     }
 }

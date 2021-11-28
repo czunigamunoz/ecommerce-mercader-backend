@@ -17,19 +17,15 @@ public class Gadget {
 
     private String brand;
 
-    private String processor;
+    private String category;
 
-    private String os;
+    private String name;
 
     private  String description;
 
-    private String memory;
-
-    private String hardDrive;
+    private double price;
 
     private  boolean availability = true;
-
-    private double price;
 
     private int quantity;
 

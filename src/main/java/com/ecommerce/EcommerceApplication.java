@@ -1,6 +1,7 @@
 package com.ecommerce;
 
 import com.ecommerce.app.model.User;
+import com.ecommerce.app.repositories.crud.GadgetCrudRepository;
 import com.ecommerce.app.repositories.crud.UserCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +18,8 @@ public class EcommerceApplication  implements CommandLineRunner {
 
 	@Autowired
 	private UserCrudRepository userRepo;
+	@Autowired
+	private GadgetCrudRepository gadgetRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceApplication.class, args);
@@ -55,5 +58,6 @@ public class EcommerceApplication  implements CommandLineRunner {
 		userPas.ifPresent(value -> System.out.println("Datos del usuario verificado: " + value));
 
 		userRepo.deleteAll();
+		gadgetRepo.deleteAll();
 	}
 }
