@@ -31,6 +31,11 @@ public class UserService {
         return repository.getAll();
     }
 
+    /**
+     * Get one user by id
+     * @param id Integer
+     * @return User object or null
+     */
     public Optional<User> getUser(int id) {
         return repository.getById(id);
     }

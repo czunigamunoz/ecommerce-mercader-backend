@@ -23,6 +23,9 @@ public class User {
     @Id
     private Integer id;
 
+    /**
+     * Represents user's identification
+     */
     private String identification;
 
     /**
@@ -30,8 +33,14 @@ public class User {
      */
     private String name;
 
+    /**
+     * Represents user's address
+     */
     private String address;
 
+    /**
+     * Represents user's cell-phone
+     */
     private String cellPhone;
 
     /**
@@ -44,8 +53,14 @@ public class User {
      */
     private String password;
 
+    /**
+     * Represents user's zone
+     */
     private String zone;
 
+    /**
+     * Represents user's type
+     */
     private String type;
 
 }

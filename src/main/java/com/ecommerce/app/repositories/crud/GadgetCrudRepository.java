@@ -6,5 +6,10 @@ import org.springframework.data.mongodb.repository.Query;
 
 import java.util.Optional;
 
+/**
+ * Represents a gadget CRUD repository
+ * @version 1.0
+ * @author czm
+ */
 public interface GadgetCrudRepository extends MongoRepository<Gadget, Integer> {
 }

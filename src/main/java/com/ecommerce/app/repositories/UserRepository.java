@@ -42,7 +42,7 @@ public class UserRepository {
     /**
      * Save new user
      * @param user User
-     * @return User
+     * @return User object
      */
     public User create(User user){
         return crudRepository.save(user);
@@ -54,7 +54,7 @@ public class UserRepository {
 
     /**
      * Delete a user
-     * @param user User
+     * @param user User object
      */
     public void delete(User user){
         crudRepository.delete(user);

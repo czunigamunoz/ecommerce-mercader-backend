@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Represents a user service
+ * Represents a gadget service
  * @version 1.0
  * @author czm
  */
@@ -30,6 +30,11 @@ public class GadgetService {
         return repository.getAll();
     }
 
+    /**
+     * Get gadget by id
+     * @param id Integer
+     * @return Gadget object or null
+     */
     public Optional<Gadget> getGadget(int id){
         return repository.getById(id);
     }

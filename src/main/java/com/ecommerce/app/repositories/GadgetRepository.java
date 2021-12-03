@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Represents a user repository
+ * Represents a gadget repository
  * @version 1.0
  * @author czm
  */
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class GadgetRepository {
 
     /**
-     * Represents user repository to connect with CRUD repository
+     * Represents gadget repository to connect with CRUD repository
      */
     @Autowired
     private GadgetCrudRepository crudRepository;
@@ -31,7 +31,7 @@ public class GadgetRepository {
     }
 
     /**
-     * Get a user with this id
+     * Get a gadget with this id
      * @param id Integer
      * @return Gadget with this id or null
      */
@@ -40,7 +40,7 @@ public class GadgetRepository {
     }
 
     /**
-     * Save new user
+     * Save new gadget
      * @param gadget Gadget object
      * @return Gadget
      */
@@ -48,13 +48,17 @@ public class GadgetRepository {
         return crudRepository.save(gadget);
     }
 
+    /**
+     * Update a gadget
+     * @param gadget Gadget object
+     */
     public void update(Gadget gadget){
         crudRepository.save(gadget);
     }
 
     /**
      * Delete a gadget
-     * @param gadget Gadget
+     * @param gadget Gadget object
      */
     public void delete(Gadget gadget){
         crudRepository.delete(gadget);

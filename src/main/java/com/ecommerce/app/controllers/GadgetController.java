@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Represents a user controller
+ * Represents a gadget controller
  * @version 1.0
  * @author czm
  */
 @RestController
 @RequestMapping("gadget")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class GadgetController {
 
     /**

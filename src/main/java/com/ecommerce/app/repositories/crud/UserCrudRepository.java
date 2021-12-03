@@ -13,7 +13,18 @@ import java.util.Optional;
  */
 public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
+    /**
+     * Look for a user associate wit email
+     * @param email String
+     * @return User object or null
+     */
     public Optional<User> getByEmail(String email);
 
+    /**
+     * Look for a user associate with an email and password
+     * @param email String
+     * @param password String
+     * @return User object or null
+     */
     public Optional<User> getByEmailAndPassword(String email, String password);
 }
