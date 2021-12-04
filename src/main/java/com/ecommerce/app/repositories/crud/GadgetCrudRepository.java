@@ -12,4 +12,11 @@ import java.util.Optional;
  * @author czm
  */
 public interface GadgetCrudRepository extends MongoRepository<Gadget, Integer> {
+
+    /**
+     * Select order with the highest id
+     * @return Gadget object
+     */
+    public Optional<Gadget> findTopByOrderByIdDesc();
+
 }

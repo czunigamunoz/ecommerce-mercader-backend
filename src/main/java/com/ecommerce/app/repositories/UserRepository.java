@@ -79,4 +79,12 @@ public class UserRepository {
     public Optional<User> authUser(String email, String password){
         return crudRepository.getByEmailAndPassword(email, password);
     }
+
+    /**
+     * Get user with the highest id
+     * @return User object
+     */
+    public Optional<User> lastUserId(){
+        return crudRepository.findTopByOrderByIdDesc();
+    }
 }

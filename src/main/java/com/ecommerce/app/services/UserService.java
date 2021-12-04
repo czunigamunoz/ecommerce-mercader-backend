@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -46,18 +45,31 @@ public class UserService {
      * @return User created
      */
     public User save(User user){
-        if (user.getId() == null
-                || user.getName() == null
+
+        if (user.getName() == null
                 || user.getEmail() == null
                 || user.getPassword() == null
                 || user.getIdentification() == null
                 || user.getType() == null){
             return user;
         }
-        Optional<User> userTemp = repository.authUser(user.getEmail(), user.getPassword());
-        if (userTemp.isEmpty()){
-            return repository.create(user);
+        Optional<User> userIdMax = repository.lastUserId();
+        if (user.getId() == null){
+            if (userIdMax.isPresent()){
+                user.setId(userIdMax.get().getId() + 1);
+            }else {
+                user.setId(1);
+            }
         }
+        Optional<User> userTemp = repository.getById(user.getId());
+        if (userTemp.isEmpty()){
+            if (!existEmail(user.getEmail())){
+                return repository.create(user);
+            }
+            user.setId(null);
+            return user;
+        }
+        user.setId(null);
         return user;
     }
 
