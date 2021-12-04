@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -54,9 +53,12 @@ public class UserService {
                 || user.getType() == null){
             return user;
         }
-        Optional<User> userTemp = repository.authUser(user.getEmail(), user.getPassword());
+        Optional<User> userTemp = repository.getById(user.getId());
         if (userTemp.isEmpty()){
-            return repository.create(user);
+            if (!existEmail(user.getEmail())){
+                return repository.create(user);
+            }
+            return user;
         }
         return user;
     }

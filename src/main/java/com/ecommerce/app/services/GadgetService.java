@@ -86,9 +86,7 @@ public class GadgetService {
                 if (gadget.getPrice() > 0){
                     gadgetTemp.get().setPrice(gadget.getPrice());
                 }
-                if (gadget.isAvailability()){
-                    gadgetTemp.get().setAvailability(gadget.isAvailability());
-                }
+                gadgetTemp.get().setAvailability(gadget.isAvailability());
                 if (gadget.getQuantity() > 0){
                     gadgetTemp.get().setQuantity(gadget.getQuantity());
                 }
