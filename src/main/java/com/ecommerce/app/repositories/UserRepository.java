@@ -24,7 +24,7 @@ public class UserRepository {
 
     /**
      * Get users
-     * @return List
+     * @return List of users
      */
     public List<User> getAll(){
         return crudRepository.findAll();
@@ -41,13 +41,17 @@ public class UserRepository {
 
     /**
      * Save new user
-     * @param user User
+     * @param user User object
      * @return User object
      */
     public User create(User user){
         return crudRepository.save(user);
     }
 
+    /**
+     * Update a user
+     * @param user User object
+     */
     public void update(User user){
         crudRepository.save(user);
     }
@@ -78,5 +82,13 @@ public class UserRepository {
      */
     public Optional<User> authUser(String email, String password){
         return crudRepository.getByEmailAndPassword(email, password);
+    }
+
+    /**
+     * Get user with the highest id
+     * @return User object
+     */
+    public Optional<User> lastUserId(){
+        return crudRepository.findTopByOrderByIdDesc();
     }
 }

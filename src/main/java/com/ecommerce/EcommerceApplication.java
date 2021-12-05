@@ -2,6 +2,7 @@ package com.ecommerce;
 
 import com.ecommerce.app.model.User;
 import com.ecommerce.app.repositories.crud.GadgetCrudRepository;
+import com.ecommerce.app.repositories.crud.OrderCrudRepository;
 import com.ecommerce.app.repositories.crud.UserCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,6 +21,9 @@ public class EcommerceApplication  implements CommandLineRunner {
 	private UserCrudRepository userRepo;
 	@Autowired
 	private GadgetCrudRepository gadgetRepo;
+	@Autowired
+	private OrderCrudRepository orderRepo;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceApplication.class, args);
@@ -59,5 +63,6 @@ public class EcommerceApplication  implements CommandLineRunner {
 
 		userRepo.deleteAll();
 		gadgetRepo.deleteAll();
+		orderRepo.deleteAll();
 	}
 }

@@ -27,4 +27,10 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
      * @return User object or null
      */
     public Optional<User> getByEmailAndPassword(String email, String password);
+
+    /**
+     * Select user with the highest id
+     * @return User object
+     */
+    public Optional<User> findTopByOrderByIdDesc();
 }

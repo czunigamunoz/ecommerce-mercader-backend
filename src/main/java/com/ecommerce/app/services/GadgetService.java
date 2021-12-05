@@ -1,6 +1,7 @@
 package com.ecommerce.app.services;
 
 import com.ecommerce.app.model.Gadget;
+import com.ecommerce.app.model.Order;
 import com.ecommerce.app.repositories.GadgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,15 +46,26 @@ public class GadgetService {
      * @return Gadget created
      */
     public Gadget save(Gadget gadget){
+        Optional<Gadget> orderMaxId = repository.lastGadgetId();
         if (gadget.getId() == null){
-            return gadget;
+            if (orderMaxId.isPresent()){
+                gadget.setId(orderMaxId.get().getId() + 1);
+            }else {
+                gadget.setId(1);
+            }
         }
-        return repository.create(gadget);
+        Optional<Gadget> dbOrder = repository.getById(gadget.getId());
+        if (dbOrder.isEmpty()){
+            return repository.create(gadget);
+        }
+        gadget.setId(null);
+        return gadget;
     }
 
     /**
      * Delete gadget
      * @param id Integer
+     * @return Boolean
      */
     public boolean delete(Integer id){
         return getGadget(id).map(gadget -> {

@@ -34,6 +34,11 @@ public class GadgetController {
         return service.getAll();
     }
 
+    /**
+     * Return Gadget object by id
+     * @param id Integer
+     * @return Gadget object
+     */
     @GetMapping("/{id}")
     public Optional<Gadget> getGadget(@PathVariable("id") int id){
         return service.getGadget(id);
