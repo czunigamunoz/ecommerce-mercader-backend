@@ -45,10 +45,20 @@ public class GadgetService {
      * @return Gadget created
      */
     public Gadget save(Gadget gadget){
+        Optional<Gadget> orderMaxId = repository.lastGadgetId();
         if (gadget.getId() == null){
-            return gadget;
+            if (orderMaxId.isPresent()){
+                gadget.setId(orderMaxId.get().getId() + 1);
+            }else {
+                gadget.setId(1);
+            }
         }
-        return repository.create(gadget);
+        Optional<Gadget> dbOrder = repository.getById(gadget.getId());
+        if (dbOrder.isEmpty()){
+            return repository.create(gadget);
+        }
+        gadget.setId(null);
+        return gadget;
     }
 
     /**

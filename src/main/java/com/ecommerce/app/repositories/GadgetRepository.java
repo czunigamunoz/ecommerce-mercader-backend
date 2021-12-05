@@ -63,4 +63,12 @@ public class GadgetRepository {
     public void delete(Gadget gadget){
         crudRepository.delete(gadget);
     }
+
+    /**
+     * Return gadget with the highest id
+     * @return Gadget object
+     */
+    public Optional<Gadget> lastGadgetId(){
+        return crudRepository.findTopByOrderByIdDesc();
+    }
 }
