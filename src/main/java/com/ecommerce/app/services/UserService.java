@@ -109,7 +109,6 @@ public class UserService {
                 repository.update(isUser.get());
                 return isUser.get();
             }
-            return user;
         }
         return user;
     }

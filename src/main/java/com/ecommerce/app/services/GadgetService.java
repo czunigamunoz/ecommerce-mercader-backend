@@ -54,8 +54,8 @@ public class GadgetService {
                 gadget.setId(1);
             }
         }
-        Optional<Gadget> dbOrder = repository.getById(gadget.getId());
-        if (dbOrder.isEmpty()){
+        Optional<Gadget> dbGadget = repository.getById(gadget.getId());
+        if (dbGadget.isEmpty()){
             return repository.create(gadget);
         }
         gadget.setId(null);
@@ -108,7 +108,6 @@ public class GadgetService {
                 repository.update(gadgetTemp.get());
                 return gadgetTemp.get();
             }
-            return gadget;
         }
         return gadget;
     }
