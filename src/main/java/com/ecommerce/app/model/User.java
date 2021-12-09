@@ -37,7 +37,7 @@ public class User {
     /**
      * Represents user's birthday
      */
-    private Date birthDay;
+    private Date birthtDay;
     /**
      * Represents user's month birthday
      */

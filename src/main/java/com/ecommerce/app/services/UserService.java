@@ -88,6 +88,12 @@ public class UserService {
                 if (user.getName() != null && user.getName().length() > 0){
                     isUser.get().setName(user.getName());
                 }
+                if (user.getBirthtDay() != null){
+                    isUser.get().setBirthtDay(user.getBirthtDay());
+                }
+                if (user.getMonthBirthtDay() != null && user.getMonthBirthtDay().length() > 0){
+                    isUser.get().setMonthBirthtDay(user.getMonthBirthtDay());
+                }
                 if (user.getAddress() != null && user.getAddress().length() > 0){
                     isUser.get().setAddress(user.getAddress());
                 }
