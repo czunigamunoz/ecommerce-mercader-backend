@@ -109,7 +109,6 @@ public class UserService {
                 repository.update(isUser.get());
                 return isUser.get();
             }
-            return user;
         }
         return user;
     }
@@ -117,6 +116,7 @@ public class UserService {
     /**
      * Delete user
      * @param id Integer
+     * @return Boolean
      */
     public boolean delete(Integer id){
         return getUser(id).map(user -> {

@@ -1,6 +1,7 @@
 package com.ecommerce.app.repositories.crud;
 
 import com.ecommerce.app.model.Gadget;
+import com.ecommerce.app.model.Order;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -18,5 +19,8 @@ public interface GadgetCrudRepository extends MongoRepository<Gadget, Integer> {
      * @return Gadget object
      */
     public Optional<Gadget> findTopByOrderByIdDesc();
+<<<<<<< HEAD
 
+=======
+>>>>>>> challenge3
 }
