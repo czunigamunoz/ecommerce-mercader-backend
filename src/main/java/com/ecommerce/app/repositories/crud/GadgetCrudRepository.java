@@ -19,8 +19,4 @@ public interface GadgetCrudRepository extends MongoRepository<Gadget, Integer> {
      * @return Gadget object
      */
     public Optional<Gadget> findTopByOrderByIdDesc();
-<<<<<<< HEAD
-
-=======
->>>>>>> challenge3
 }

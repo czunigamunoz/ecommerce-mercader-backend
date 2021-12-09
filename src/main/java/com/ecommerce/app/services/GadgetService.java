@@ -53,19 +53,15 @@ public class GadgetService {
             }else {
                 gadget.setId(1);
             }
-<<<<<<< HEAD
         }
         Optional<Gadget> dbOrder = repository.getById(gadget.getId());
         if (dbOrder.isEmpty()){
             return repository.create(gadget);
         }
-=======
-        }
         Optional<Gadget> dbGadget = repository.getById(gadget.getId());
         if (dbGadget.isEmpty()){
             return repository.create(gadget);
         }
->>>>>>> challenge3
         gadget.setId(null);
         return gadget;
     }

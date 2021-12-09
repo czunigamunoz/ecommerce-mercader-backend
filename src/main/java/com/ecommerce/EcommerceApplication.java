@@ -32,36 +32,6 @@ public class EcommerceApplication  implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		userRepo.deleteAll();
-		userRepo.saveAll(List.of(
-				new User(1,
-					"123123",
-					"CARLOS ALBERTO GARCIA",
-					"CR 34-45",
-					"311222222",
-					"cgarcia@gmail.com",
-					"Demo123.",
-					"ZONA 2",
-					"ADM"
-				),
-				new User(2,
-						"1231234",
-						"Isabel Castillo",
-						"CR 34-45",
-						"311222224",
-						"isabelcast@gmail.com",
-						"Demo12345",
-						"ZONA 2",
-						"ADM"
-				)
-		));
-		userRepo.findAll().forEach(System.out::println);
-
-		Optional<User> user = userRepo.getByEmail("isabelcast@gmail.com");
-		user.ifPresent(value -> System.out.println("Datos del usuario: " + value));
-		Optional<User> userPas = userRepo.getByEmailAndPassword("cgarcia@gmail.com", "Demo123.");
-		userPas.ifPresent(value -> System.out.println("Datos del usuario verificado: " + value));
-
-		userRepo.deleteAll();
 		gadgetRepo.deleteAll();
 		orderRepo.deleteAll();
 	}

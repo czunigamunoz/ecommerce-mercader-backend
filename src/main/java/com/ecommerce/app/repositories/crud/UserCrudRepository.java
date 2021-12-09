@@ -18,7 +18,7 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
      * @param email String
      * @return User object or null
      */
-    public Optional<User> getByEmail(String email);
+    Optional<User> getByEmail(String email);
 
     /**
      * Look for a user associate with an email and password
@@ -26,11 +26,11 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
      * @param password String
      * @return User object or null
      */
-    public Optional<User> getByEmailAndPassword(String email, String password);
+    Optional<User> getByEmailAndPassword(String email, String password);
 
     /**
      * Select user with the highest id
      * @return User object
      */
-    public Optional<User> findTopByOrderByIdDesc();
+    Optional<User> findTopByOrderByIdDesc();
 }

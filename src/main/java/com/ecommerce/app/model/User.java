@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 /**
  * Represents an User
  * @version 1.0
@@ -32,7 +34,14 @@ public class User {
      * Represents user's name
      */
     private String name;
-
+    /**
+     * Represents user's birthday
+     */
+    private Date birthDay;
+    /**
+     * Represents user's month birthday
+     */
+    private String monthBirthtDay;
     /**
      * Represents user's address
      */
