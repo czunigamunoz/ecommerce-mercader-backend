@@ -61,6 +61,11 @@ public class OrderService {
         return order;
     }
 
+    /**
+     * Update order
+     * @param order Order object
+     * @return Order with fields updated or order with same fields that received
+     */
     public Order update(Order order){
         if (order.getId() != null){
             Optional<Order> orderTemp = repository.getOrder(order.getId());

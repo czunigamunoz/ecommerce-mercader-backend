@@ -20,16 +20,42 @@ import java.util.Map;
 @Document(collection = "orders")
 public class Order {
 
+    /**
+     * Status constant Pendiente
+     */
     public static String PENDING = "Pendiente";
+    /**
+     * Status constant Aprobada
+     */
     public static String APPROVED = "Aprobada";
+    /**
+     * Status constant Rechazada
+     */
     public static String REJECTED = "Rechazada";
 
+    /**
+     * Represents primary key from order
+     */
     @Id
     private Integer id;
+    /**
+     * Represents order register day as date
+     */
     private Date registerDay;
+    /**
+     * Represents order status
+     */
     private String status;
+    /**
+     * Represents order sales man
+     */
     private User salesMan;
-
+    /**
+     * Represents order's products
+     */
     private Map<Integer, Gadget> products;
+    /**
+     * Represents order's quantities
+     */
     private Map<Integer, Integer> quantities;
 }
