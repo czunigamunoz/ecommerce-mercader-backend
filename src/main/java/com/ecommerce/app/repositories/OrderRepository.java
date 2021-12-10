@@ -1,11 +1,11 @@
 package com.ecommerce.app.repositories;
 
 import com.ecommerce.app.model.Order;
-import com.ecommerce.app.model.User;
 import com.ecommerce.app.repositories.crud.OrderCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,7 +78,32 @@ public class OrderRepository {
      * @param zone String
      * @return List or orders
      */
-    public List<Order> findByZone(String zone){
+    public List<Order> getByZone(String zone){
         return crudRepository.findByZone(zone);
     }
+
+    /**
+     * Return order by status
+     * @param status String
+     * @param id Integer
+     * @return List of orders
+     */
+    public List<Order> getByStatusAndSalesman(String status, Integer id){ return crudRepository.findByStatusAndSalesMan_Id(status, id); }
+
+    /**
+     * Return order with an associate salesman
+     * @param id Integer
+     * @return List of orders
+     */
+    public List<Order> getBySalesman(Integer id){
+        return crudRepository.findBySalesMan_Id(id);
+    }
+
+    /**
+     * Return order with an associate register day and salesman
+     * @param registerDay Date
+     * @param id Integer
+     * @return Lists of orders
+     */
+    public List<Order> getByDateAndSalesman(Date registerDay, Integer id){ return crudRepository.findByRegisterDayAndSalesMan_Id(registerDay, id); }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,5 +85,35 @@ public class OrderController {
     @GetMapping("/zona/{zone}")
     public List<Order> getByZone(@PathVariable("zone") String zone){
         return service.getByZone(zone);
+    }
+
+    /**
+     * Function to return order by status and salesman
+     * @param status String
+     * @param id Integer
+     * @return List of orders
+     */
+    @GetMapping("state/{status}/{id}")
+    public List<Order> getByStatusAndSalesman(@PathVariable("status") String status, @PathVariable("id") Integer id){
+        return service.getByStatusAndSalesman(status, id);
+    }
+
+    /**
+     * Function to return order by salesman
+     * @param id Integer
+     * @return List of orders
+     */
+    @GetMapping("salesman/{id}")
+    public List<Order> getBySalesman(@PathVariable("id") Integer id){ return service.getBySalesman(id); }
+
+    /**
+     *
+     * @param registerDay Date
+     * @param id Integer
+     * @return List of orders
+     */
+    @GetMapping("/order/{registerDay}/{id}")
+    public List<Order> getByRegisterDayAndSalesman(@PathVariable("registerDay")Date registerDay, @PathVariable("id") Integer id){
+        return service.getByRegisterDayAndSalesman(registerDay, id);
     }
 }

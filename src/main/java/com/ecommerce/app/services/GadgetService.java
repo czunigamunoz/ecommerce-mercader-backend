@@ -1,7 +1,6 @@
 package com.ecommerce.app.services;
 
 import com.ecommerce.app.model.Gadget;
-import com.ecommerce.app.model.Order;
 import com.ecommerce.app.repositories.GadgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
