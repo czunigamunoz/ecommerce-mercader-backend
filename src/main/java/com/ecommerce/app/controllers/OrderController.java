@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,8 +111,8 @@ public class OrderController {
      * @param id Integer
      * @return List of orders
      */
-    @GetMapping("/order/{registerDay}/{id}")
-    public List<Order> getByRegisterDayAndSalesman(@PathVariable("registerDay")Date registerDay, @PathVariable("id") Integer id){
+    @GetMapping("date/{registerDay}/{id}")
+    public List<Order> getByRegisterDayAndSalesman(@PathVariable("registerDay")String registerDay, @PathVariable("id") Integer id){
         return service.getByRegisterDayAndSalesman(registerDay, id);
     }
 }

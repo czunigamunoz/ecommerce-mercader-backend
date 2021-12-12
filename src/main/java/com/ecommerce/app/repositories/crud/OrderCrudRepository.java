@@ -1,11 +1,9 @@
 package com.ecommerce.app.repositories.crud;
 
 import com.ecommerce.app.model.Order;
-import com.ecommerce.app.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,14 +36,6 @@ public interface OrderCrudRepository extends MongoRepository<Order, Integer> {
      * @return List or orders
      */
     List<Order> findBySalesMan_Id(Integer id);
-
-    /**
-     * Return orders by register day and salesman
-     * @param registerDay Date
-     * @param id Integer
-     * @return List of orders
-     */
-    List<Order> findByRegisterDayAndSalesMan_Id(Date registerDay, Integer id);
 
     /**
      * Select order with the highest id

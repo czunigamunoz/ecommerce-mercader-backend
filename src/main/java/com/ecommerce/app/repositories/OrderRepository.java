@@ -4,8 +4,12 @@ import com.ecommerce.app.model.Order;
 import com.ecommerce.app.repositories.crud.OrderCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Criteria;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +20,9 @@ import java.util.Optional;
  */
 @Repository
 public class OrderRepository {
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     /**
      * Represents order repository to connect with CRUD repository
@@ -100,10 +107,22 @@ public class OrderRepository {
     }
 
     /**
-     * Return order with an associate register day and salesman
-     * @param registerDay Date
+     * Returns orders by date and salesman id
+     * @param dateStr String
      * @param id Integer
-     * @return Lists of orders
+     * @return List of orders
      */
-    public List<Order> getByDateAndSalesman(Date registerDay, Integer id){ return crudRepository.findByRegisterDayAndSalesMan_Id(registerDay, id); }
+    public List<Order> getByDateAndSalesman(String dateStr, Integer id) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Query query = new Query();
+
+        Criteria dateCriteria = Criteria.where("registerDay")
+                .gte(LocalDate.parse(dateStr, dtf).minusDays(1).atStartOfDay())
+                .lt(LocalDate.parse(dateStr, dtf).plusDays(1).atStartOfDay())
+                .and("salesMan.id").is(id);
+
+        query.addCriteria(dateCriteria);
+
+        return mongoTemplate.find(query,Order.class);
+    }
 }

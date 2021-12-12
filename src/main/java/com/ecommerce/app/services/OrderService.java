@@ -5,7 +5,6 @@ import com.ecommerce.app.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -122,9 +121,9 @@ public class OrderService {
 
     /**
      * Return orders by register day and salesman
-     * @param registerDay Date
+     * @param registerDay String
      * @param id Integer
      * @return List of orders
      */
-    public List<Order> getByRegisterDayAndSalesman(Date registerDay, Integer id){ return repository.getByDateAndSalesman(registerDay, id); }
+    public List<Order> getByRegisterDayAndSalesman(String registerDay, Integer id){ return repository.getByDateAndSalesman(registerDay, id); }
 }

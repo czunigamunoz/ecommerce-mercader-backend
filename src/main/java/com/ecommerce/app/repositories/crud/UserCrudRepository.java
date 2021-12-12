@@ -2,7 +2,6 @@ package com.ecommerce.app.repositories.crud;
 
 import com.ecommerce.app.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 
 import java.util.Optional;
 
