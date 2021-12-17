@@ -91,4 +91,11 @@ public class UserRepository {
     public Optional<User> lastUserId(){
         return crudRepository.findTopByOrderByIdDesc();
     }
+
+    /**
+     * Get user's list with specific month birthday
+     * @param month String
+     * @return List of users
+     */
+    public List<User> getByMonthBirthDay(String month){ return crudRepository.findByMonthBirthtDay(month);}
 }

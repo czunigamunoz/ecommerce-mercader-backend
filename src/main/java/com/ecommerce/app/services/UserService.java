@@ -150,4 +150,11 @@ public class UserService {
         Optional<User> user = repository.authUser(email, password);
         return user.orElse(new User());
     }
+
+    /**
+     * Function to get a list of user by month birthday
+     * @param month String
+     * @return List of users
+     */
+    public List<User> getByMonthBirthDay(String month){ return repository.getByMonthBirthDay(month);}
 }

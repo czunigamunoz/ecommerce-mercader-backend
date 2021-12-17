@@ -3,6 +3,7 @@ package com.ecommerce.app.repositories.crud;
 import com.ecommerce.app.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,4 +33,11 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
      * @return User object
      */
     Optional<User> findTopByOrderByIdDesc();
+
+    /**
+     * Look for user associate with month birthday
+     * @param month String
+     * @return List of users
+     */
+    List<User> findByMonthBirthtDay(String month);
 }

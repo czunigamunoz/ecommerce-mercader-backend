@@ -114,4 +114,18 @@ public class GadgetService {
         }
         return gadget;
     }
+
+    /**
+     * Function to get a list of gadgets with a price less and equal than other
+     * @param price double
+     * @return List of gadget
+     */
+    public List<Gadget> getPriceLower(double price){ return repository.getByPriceLower(price);}
+
+    /**\
+     * Function to get a list of gadget with an associate description
+     * @param description String
+     * @return List of gadget
+     */
+    public List<Gadget> getByDescription(String description) { return repository.getByDescription(description);}
 }

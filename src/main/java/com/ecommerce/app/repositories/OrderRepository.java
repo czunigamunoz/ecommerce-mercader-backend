@@ -21,6 +21,9 @@ import java.util.Optional;
 @Repository
 public class OrderRepository {
 
+    /**
+     * Represents instance of Mongo template for criteria
+     */
     @Autowired
     private MongoTemplate mongoTemplate;
 

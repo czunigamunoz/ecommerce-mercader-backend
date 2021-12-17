@@ -71,4 +71,18 @@ public class GadgetRepository {
     public Optional<Gadget> lastGadgetId(){
         return crudRepository.findTopByOrderByIdDesc();
     }
+
+    /**
+     * Return list of gadget lower and equal than a price
+     * @param price double
+     * @return List of gadgets
+     */
+    public List<Gadget> getByPriceLower(double price){ return crudRepository.findByPriceLessThanEqual(price);}
+
+    /**
+     * Return list of gadget with a description
+     * @param description String
+     * @return List of gadgets
+     */
+    public List<Gadget> getByDescription(String description){ return crudRepository.findByDescriptionContainingIgnoreCase(description);}
 }

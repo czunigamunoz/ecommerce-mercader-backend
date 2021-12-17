@@ -107,4 +107,12 @@ public class UserController {
     public boolean delete(@PathVariable("id") Integer id){
         return service.delete(id);
     }
+
+    /**
+     * Function to get a user by birth month day
+     * @param month String
+     * @return List of users
+     */
+    @GetMapping("/birthday/{month}")
+    public List<User> getByMonthBirthDay(@PathVariable("month") String month) { return service.getByMonthBirthDay(month);}
 }

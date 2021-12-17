@@ -75,4 +75,20 @@ public class GadgetController {
     public boolean delete(@PathVariable("id") Integer id) {
         return service.delete(id);
     }
+
+    /**
+     * Function to get a list of gadgets with a price less and equal than a price
+     * @param price double
+     * @return List of gadgets
+     */
+    @GetMapping("/price/{price}")
+    public List<Gadget> getByPriceLower(@PathVariable("price") double price){ return service.getPriceLower(price);}
+
+    /**
+     * Function to get a list of gadgets by description
+     * @param description String
+     * @return List of gadgets
+     */
+    @GetMapping("/description/{description}")
+    public List<Gadget> getByDescription(@PathVariable("description") String description){ return service.getByDescription(description);}
 }
